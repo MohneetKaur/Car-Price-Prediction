@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f2f2f2; /* Light background color */
+            background-image: url("https://cdn.dribbble.com/users/992933/screenshots/4608688/car_loop.gif"); /* Path to your GIF image */
+            background-repeat: no-repeat;
+            background-position: right top;
+            background-size: 100px;
+            opacity: 0.9; /* Adjust the opacity as per your preference */
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff; /* Light color for the form container */
+            opacity: 0.95; /* Adjust the opacity as per your preference */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .prediction-result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Car Price Prediction</h1>
+    <form action="/predict" method="POST">
+        <label for="symboling">Symboling:</label>
+        <input type="number" id="symboling" name="symboling" required><br><br>
+        
+        <label for="fueltype">Fuel Type:</label>
+        <select id="fueltype" name="fueltype" required>
+            <option value="gas">Gas</option>
+            <option value="diesel">Diesel</option>
+        </select><br><br>
+        
+        <label for="aspiration">Aspiration:</label>
+        <select id="aspiration" name="aspiration" required>
+            <option value="std">Standard</option>
+            <option value="turbo">Turbo</option>
+        </select><br><br>
+        
+        <label for="doornumber">Door Number:</label>
+        <select id="doornumber" name="doornumber" required>
+            <option value="two">Two</option>
+            <option value="four">Four</option>
+        </select><br><br>
+        
+        <label for="carbody">Car Body:</label>
+        <select id="carbody" name="carbody" required>
+            <option value="sedan">Sedan</option>
+            <option value="hatchback">Hatchback</option>
+            <option value="wagon">Wagon</option>
+            <option value="hardtop">Hardtop</option>
+            <option value="convertible">Convertible</option>
+        </select><br><br>
+        
+        <label for="drivewheel">Drive Wheel:</label>
+        <select id="drivewheel" name="drivewheel" required>
+            <option value="fwd">Front Wheel Drive</option>
+            <option value="rwd">Rear Wheel Drive</option>
+            <option value="4wd">4-Wheel Drive</option>
+        </select><br><br>
+        
+        <label for="enginelocation">Engine Location:</label>
+        <select id="enginelocation" name="enginelocation" required>
+            <option value="front">Front</option>
+            <option value="rear">Rear</option>
+        </select><br><br>
+        
+        <label for="wheelbase">Wheel Base:</label>
+        <input type="number" id="wheelbase" name="wheelbase" step="any" required><br><br>
+        
+        <label for="carlength">Car Length (in inches):</label>
+        <input type="number" id="carlength" name="carlength" step="any" required><br><br>
+        
+        <label for="carwidth">Car Width (in inches):</label>
+        <input type="number" id="carwidth" name="carwidth" step="any" required><br><br>
+
+        <label for="carheight">Car Height (in inches):</label>
+        <input type="number" id="carheight" name="carheight" step="any" required><br><br>
+        
+        <label for="curbweight">Curb Weight:</label>
+        <input type="number" id="curbweight" name="curbweight" step="any" required><br><br>
+        
+        <label for="enginetype">Engine Type:</label>
+        <select id="enginetype" name="enginetype" required>
+            <option value="dohc">DOHC</option>
+            <option value="dohcv">DOHCV</option>
+            <option value="l">L</option>
+            <option value="ohc">OHC</option>
+            <option value="ohcf">OHCF</option>
+            <option value="ohcv">OHCV</option>
+            <option value="rotor">Rotor</option>
+        </select><br><br>
+        
+        <label for="cylindernumber">Cylinder Number:</label>
+        <select id="cylindernumber" name="cylindernumber" required>
+            <option value="two">Two</option>
+            <option value="three">Three</option>
+            <option value="four">Four</option>
+            <option value="five">Five</option>
+            <option value="six">Six</option>
+            <option value="eight">Eight</option>
+            <option value="twelve">Twelve</option>
+        </select><br><br>
+        
+        <label for="enginesize">Engine Size (in cubic centimeters):</label>
+        <input type="number" id="enginesize" name="enginesize" required><br><br>
+        
+        <label for="fuelsystem">Fuel System:</label>
+        <select id="fuelsystem" name="fuelsystem" required>
+            <option value="1bbl">1bbl</option>
+            <option value="2bbl">2bbl</option>
+            <option value="4bbl">4bbl</option>
+            <option value="idi">IDI</option>
+            <option value="mfi">MFI</option>
+            <option value="mpfi">MPFI</option>
+            <option value="spdi">SPDI</option>
+            <option value="spfi">SPFI</option>
+        </select><br><br>
+        
+        <label for="boreratio">Bore Ratio:</label>
+        <input type="number" id="boreratio" name="boreratio" step="any" required><br><br>
+        
+        <label for="stroke">Stroke:</label>
+        <input type="number" id="stroke" name="stroke" step="any" required><br><br>
+        
+        <label for="compressionratio">Compression Ratio:</label>
+        <input type="number" id="compressionratio" name="compressionratio" step="any" required><br><br>
+        
+        <label for="horsepower">Horsepower:</label>
+        <input type="number" id="horsepower" name="horsepower" required><br><br>
+        
+        <label for="peakrpm">Peak RPM:</label>
+        <input type="number" id="peakrpm" name="peakrpm" required><br><br>
+        
+        <label for="citympg">City MPG:</label>
+        <input type="number" id="citympg" name="citympg" required><br><br>
+        
+        <label for="highwaympg">Highway MPG:</label>
+        <input type="number" id="highwaympg" name="highwaympg" required><br><br>
+        
+        <input type="submit" value="Predict">
+    </form>
+    {% if prediction %}
+    <div class="prediction-result">
+        
+        <p>{{ prediction }}</p>
+    </div>
+    {% endif %}
+</body>
+</html>
+
+
+    
